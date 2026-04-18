@@ -26,7 +26,7 @@ dependencies = [
     "PyNaCl>=1.5.0",
 
     # WebAuthn / Passkeys
-    "py-webauthn>=2.2.0",
+    "webauthn>=2.2.0",
 
     # Utilities
     "python-dotenv>=1.0.0",
