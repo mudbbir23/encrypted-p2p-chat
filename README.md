@@ -1,4 +1,9 @@
-# Encrypted P2P Chat
+![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)
+![Security: Signal Protocol](https://img.shields.io/badge/Security-Signal_Protocol-blue.svg)
+![Auth: Passkeys](https://img.shields.io/badge/Auth-Passkeys_(WebAuthn)-green.svg)
+![CI Status](https://github.com/mudbbir23/encrypted-p2p-chat/actions/workflows/ci.yml/badge.svg)
+![Backend: FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg)
+![Frontend: SolidJS](https://img.shields.io/badge/Frontend-SolidJS-446B9E.svg)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)
 ![Security: Signal Protocol](https://img.shields.io/badge/Security-Signal_Protocol-blue.svg)
@@ -11,8 +16,6 @@ A production-ready, end-to-end encrypted peer-to-peer chat application implement
 
 ---
 
-## ✨ Features
-
 - 🔐 **End-to-end encryption** — Signal Protocol (X3DH + Double Ratchet)
 - 🔑 **Passkey / WebAuthn authentication** — no passwords, phishing-resistant
 - 🫥 **Zero-knowledge server** — server only sees ciphertext, never plaintext
@@ -21,6 +24,9 @@ A production-ready, end-to-end encrypted peer-to-peer chat application implement
 - 🩹 **Post-compromise security** — self-healing sessions after key exposure
 - 🗝️ **One-time prekeys (OPK)** — 4-DH X3DH for maximum asynchronous security
 - 💾 **Client-side key storage** — all private keys in browser IndexedDB, never uploaded
+- 🧪 **Comprehensive Testing** — 100% verified crypto primitives and handshake logic
+
+![E2E Chat Screenshot](https://raw.githubusercontent.com/mudbbir23/encrypted-p2p-chat/master/assets/screenshot.png)
 
 ---
 
@@ -133,8 +139,28 @@ Frontend runs at **http://localhost:5173**
 3. Start a chat from Alice's tab — type Bob's username and click **Chat**
 4. Send a message → Bob's tab receives it **decrypted in plaintext** ✅
 
-> ⚠️ **First run tip**: If decryption fails after registration, clear IndexedDB in both tabs:  
-> F12 → Application → Storage → IndexedDB → `e2e_chat_keys` → Delete database → Refresh
+---
+
+## 🧪 Testing
+
+The project includes an extensive automated testing suite for both the frontend cryptographic engine and the backend API logic.
+
+### Frontend (Vitest)
+Tests verify Base64url encoding, HKDF derivation, constant-time equality, and the full X3DH Alice-to-Bob key agreement.
+```bash
+cd frontend
+npm run test
+```
+
+### Backend (Pytest)
+Tests verify the cryptographic primitives used by the server for signature verification and bundle management.
+```bash
+cd backend
+python -m pytest tests/test_crypto.py
+```
+
+### CI/CD
+All tests are automatically executed on every Push or Pull Request via **GitHub Actions** to ensure the `master` branch remains stable.
 
 ---
 
